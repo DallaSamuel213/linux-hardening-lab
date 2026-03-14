@@ -16,6 +16,9 @@ Running services before hardening:
 ServiceStatusxrdpRunning — unnecessaryxrdp-sesmanRunning — unnecessarylightdmRunning — unnecessary on WSL2rtkit-daemonRunning — unnecessarycronRunning — requireddbusRunning — requiredpolkitRunning — requiredunattended-upgradesRunning — beneficial, keptcore systemd servicesRunning — required
 Key finding: Port 3389 RDP was exposed on all interfaces with no restriction. RDP is one of the most commonly targeted services in real-world attacks — used for brute force, credential stuffing, and exploitation of known vulnerabilities such as BlueKeep. Its presence on a default installation with no firewall represents a significant unnecessary risk.
 
+![Baseline Ports](screenshots/01_baseline_ports.png)
+
+
 Hardening Actions
 1. Disabled Unnecessary Services
 Four services were identified as unnecessary and disabled:
@@ -54,6 +57,9 @@ SettingValue SetReasonPermitRootLoginnoPrevents direct root login over SSH — a
 SSH service restarted to apply changes:
 bashsudo service ssh restart
 
+![Services After Hardening](screenshots/02_services_after_hardening.png)
+
+
 3. Firewall Configuration
 Tool used: ufw (Uncomplicated Firewall)
 bashsudo ufw default deny incoming
@@ -74,6 +80,9 @@ Status: active
 Default: deny (incoming), allow (outgoing)
 22/tcp    ALLOW IN    Anywhere
 
+![UFW Status](screenshots/03_ufw_status.png)
+
+
 4. File Permission Hardening
 Sensitive system files were checked and permissions set to secure values:
 bashsudo chmod 600 /etc/shadow
@@ -81,6 +90,9 @@ sudo chmod 644 /etc/passwd
 sudo chmod 640 /etc/group
 sudo chmod 600 /etc/gshadow
 FilePermissionsReason/etc/shadow600Contains password hashes — root read/write only/etc/passwd644User account info — readable by all, writable by root only/etc/group640Group membership info — restricted read/etc/gshadow600Group password hashes — root only
+
+![File Permissions](screenshots/04_file_permissions.png)
+
 
 5. User Security Checks
 Three critical checks were performed:
