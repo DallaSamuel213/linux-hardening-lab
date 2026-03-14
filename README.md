@@ -149,4 +149,4 @@ Audit before action — understanding the baseline state before making changes i
 This process mirrors real-world Linux server hardening procedures used by security engineers and system administrators in enterprise environments. The same checklist can be adapted and applied to Ubuntu, Debian, or any other Debian-based production server.
 
 CyberJKD — Becoming dangerous through fundamentals.
-github.com/dallasamuel
+[github.com/dallasamuel](https://github.com/dallasamuel)
